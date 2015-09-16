@@ -10,7 +10,10 @@
     <!-- Hmm, what is the impact of web fonts on speed? Measure it...
     <link href="//fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">-->
 
-    <!--<link href="css/style.css" rel="stylesheet">-->
+    <!-- removed call to external stylesheet style.css
+    <link href="css/style.css" rel="stylesheet">-->
+
+<!-- created async script using webfont.js from Google to get additional font -->
 <script async>
   WebFontConfig = {
     google: {
@@ -23,7 +26,14 @@
       s.parentNode.insertBefore(wf, s);
    })(document);
 </script>
-  <style>html {
+  
+  <!-- used an internal style sheet to replace the external style sheet
+  **   another option may have been to inline the necessary styles and I
+  **   realize that I would also have to do make this internal for each 
+  **   additional page that connects to this style sheet
+  -->
+  <style>
+  html {
   font-size: 100%;
   overflow-y: scroll;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
@@ -73,15 +83,16 @@ footer span { float: right; font-style: italic; }
   header p { padding-left: 4.5em;}
 }
 </style>
+    <!-- added media="print" to css link to make stylesheet use lazy loading and use stylesheet only when user wants to print -->
     <link href="css/print.css" rel="stylesheet" media="print">
 
-
-
+    <!-- added async to script tag -->
     <script async src="js/perfmatters.js"></script>
   </head>
 
   <body>
     <header>
+      <!-- compressed pizzeria.jpg image using jpegtran -->
       <a href="/"><img src="img/profilepic.jpg"></a>
       <p>Cameron Pittman<br><span>Course Developer</span></p>
     </header>
@@ -112,6 +123,7 @@ footer span { float: right; font-style: italic; }
           </li>
 
           <li>
+            <!-- compressed pizzeria.jpg image using jpegtran -->
             <img style="width: 100px;" src="views/images/pizzeria.jpg">
             <a href="views/pizza.html">Cam's Pizzeria</a>
             <p>Who wants a performant pizza?</p>
@@ -122,6 +134,10 @@ footer span { float: right; font-style: italic; }
     <footer>
       <p>&copy; Web Performance 2014 <span id="crp-stats"></span></p>
     </footer>
+
+      <!--deferred google analytics until the end of after the page has loaded
+      **  and made the analystics.js script async
+      -->
 	    <script>
       (function(w,g){w['GoogleAnalyticsObject']=g;
       w[g]=w[g]||function(){(w[g].q=w[g].q||[]).push(arguments)};w[g].l=1*new Date();})(window,'ga');
