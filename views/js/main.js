@@ -507,6 +507,7 @@ function updatePositions() {
   // this calculation outside of for loop to avoid
   topLocation = document.body.scrollTop
 
+  // Change 2 & 3
   // instead of using querySelectorAll, replaced with getElementsByClassName to 
   // help increase performance by selecting the 'mover' items.
   // moved items array outside of loop to avoid layout thrashing!
@@ -529,11 +530,12 @@ function updatePositions() {
 // runs updatePositions on scroll
 window.addEventListener('scroll', updatePositions);
 
-// Change 2
 // Generates the sliding pizzas when the page loads.
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
+
+  // Change 4
   // changed i to 32 to account for max screen size of 1024 x 2048
   // pizza number was 200 which was excessive because most of the pizzas were not shown.
   for (var i = 0; i < 32; i++) {
