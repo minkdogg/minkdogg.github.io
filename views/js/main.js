@@ -423,6 +423,7 @@ var resizePizzas = function(size) {
 
   // Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
   function determineDx (elem, size) {
+    
     var oldwidth = elem.offsetWidth;
     var windowwidth = document.querySelector("#randomPizzas").offsetWidth;
     var oldsize = oldwidth / windowwidth;
@@ -449,11 +450,17 @@ var resizePizzas = function(size) {
   }
 
   // Iterates through pizza elements on the page and changes their widths
+  // Change 1
+  // added new array 'pizzaSizeContainers' to contain all elements with the class
+  // name randomPizzaContainer. Moved dx and newwidth outside of for loop so these
+  // values would not be recalculated during each iteration.
   function changePizzaSizes(size) {
-    for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {
-      var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
-      var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
-      document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
+    var pizzaSizeContainers = document.querySelectorAll('.randomPizzaContainer');
+    var dx = determineDx(pizzaSizeContainers[0], size);
+    var newwidth = (pizzaSizeContainers[0].offsetWidth + dx) + 'px';
+
+    for (var i = 0; i < pizzaSizeContainers.length; i++) {
+      pizzaSizeContainers[i].style.width = newwidth;
     }
   }
 
@@ -502,19 +509,28 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
-  // Change 1
+  // Change 2
   // added variable topLocation to calculate location once and moved
-  // this calculation outside of for loop to avoid
+  // this calculation outside of for loop. Probably didn't need to create
+  // this variable, but I wasn't sure if I would use this value again and
+  // I didn't want to recalculate this position.
   topLocation = document.body.scrollTop
 
-  // Change 2 & 3
+  // Change 3 & 4
   // instead of using querySelectorAll, replaced with getElementsByClassName to 
   // help increase performance by selecting the 'mover' items.
   // moved items array outside of loop to avoid layout thrashing!
   var items = document.getElementsByClassName('mover');
-  for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((topLocation / 1250) + (i % 5));
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+
+  // Change 5 (addition for submittal 2)
+  // Based on great project review advice, created an additional for loop to store
+  // the 5 phase values in an array, instead of re-calculating the same values.
+  var phase = []; 
+  for (var i = 0; i < 5; i++) {
+    phase.push(Math.sin(topLocation + i) * 100);
+  }
+  for (var i = 0, max = items.length; i < max; i++) {
+    items[i].style.left = items[i].basicLeft + phase[i%5] + 'px';
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -534,11 +550,14 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
+  var screenHeight = window.innerHeight
+  var pizzaNumber = Math.ceil(screenHeight / s) * cols
 
-  // Change 4
-  // changed i to 32 to account for max screen size of 1024 x 2048
+  // Change 6
+  // changed pizza numbers to a variable based on the screen height (help from notes given
+  // b reviewer on project submittal 1)
   // pizza number was 200 which was excessive because most of the pizzas were not shown.
-  for (var i = 0; i < 32; i++) {
+  for (var i = 0; i < pizzaNumber; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
