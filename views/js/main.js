@@ -450,12 +450,12 @@ var resizePizzas = function(size) {
   }
 
   // Iterates through pizza elements on the page and changes their widths
-  // Change 1
+  // Change 1 (submittal 3 - was querySelectorAll)
   // added new array 'pizzaSizeContainers' to contain all elements with the class
   // name randomPizzaContainer. Moved dx and newwidth outside of for loop so these
   // values would not be recalculated during each iteration.
   function changePizzaSizes(size) {
-    var pizzaSizeContainers = document.querySelectorAll('.randomPizzaContainer');
+    var pizzaSizeContainers = document.getElementsByClassName('randomPizzaContainer');
     var dx = determineDx(pizzaSizeContainers[0], size);
     var newwidth = (pizzaSizeContainers[0].offsetWidth + dx) + 'px';
 
@@ -514,7 +514,8 @@ function updatePositions() {
   // this calculation outside of for loop. Probably didn't need to create
   // this variable, but I wasn't sure if I would use this value again and
   // I didn't want to recalculate this position.
-  topLocation = document.body.scrollTop
+  // ****** Submittal 3 - added divided by 1250 which I forgot. Thanks!
+  topLocation = document.body.scrollTop / 1250;
 
   // Change 3 & 4
   // instead of using querySelectorAll, replaced with getElementsByClassName to 
@@ -522,7 +523,7 @@ function updatePositions() {
   // moved items array outside of loop to avoid layout thrashing!
   var items = document.getElementsByClassName('mover');
 
-  // Change 5 (addition for submittal 2)
+  // Change 5
   // Based on great project review advice, created an additional for loop to store
   // the 5 phase values in an array, instead of re-calculating the same values.
   var phase = []; 
@@ -550,8 +551,8 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
-  var screenHeight = window.innerHeight
-  var pizzaNumber = Math.ceil(screenHeight / s) * cols
+  var screenHeight = window.innerHeight;
+  var pizzaNumber = Math.ceil(screenHeight / s) * cols;
 
   // Change 6
   // changed pizza numbers to a variable based on the screen height (help from notes given

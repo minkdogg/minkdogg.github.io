@@ -6,7 +6,12 @@ To evaluate project for part 1, open index.html in a web-browser (Chrome preferr
 
 To evaluate project for part 2, open pizza.html found in folder 'views'.
 
-####Project Notes
+####Project Notes (Submittal 3)
+
+1) Added missing semi-colons. (Line 518, Line 567, Line 568)
+2) Added missing "divide by 1250 for scrollTop" (Line 518)
+3) Replaced querySelectorAll with getElementsByClassName (Line 458)
+
 
 Another great project. I included my non-minified index.html file in case you wanted to look it over. Nothing special, but I just included it for reference.
 
@@ -41,20 +46,18 @@ http://jpegclub.org/jpegtran/
 
 ####Part 2: Optimize Frames per Second in pizza.html
 
-	*New for Submittal 2*
-	1) (Starting at Line 453) To acheive a time of less than 5ms to resize pizza, I added a new array called pizzaSizeContainers to contain all elements with the class name randomPizzaContainer. I moved dx and newwidth outside of for loop so these values would not be recalculated during each iteration.
+	
+	1) (Starting at Line 452) To acheive a time of less than 5ms to resize pizza, I added a new array called pizzaSizeContainers to contain all elements with the class name randomPizzaContainer. I moved dx and newwidth outside of for loop so these values would not be recalculated during each iteration.
 
 	2) (Starting at Line 512) Added variable 'topLocation' to calculate value once. Probably not needed for this task, but I did it in case I used the value again.
 
-	3) (Starting at Line 519) Instead of using querySelectorAll, replaced with getElementsByClassName to improve performance of retrieving items.
+	3) (Starting at Line 520) Instead of using querySelectorAll, replaced with getElementsByClassName to improve performance of retrieving items.
 
-    4) (Starting at Line 519) Moved 'items' array outside of for loop to avoid layout thrashing!
+    4) (Starting at Line 520) Moved 'items' array outside of for loop to avoid layout thrashing!
 
-    *New for Submittal 2*
-    5) (Starting at LIne 525) Based on great project review advice, created an additional for loop to store the 5 phase values in an array, instead of re-calculating the same 5 values over and over again.
+    5) (Starting at Line 526) Based on great project review advice, created an additional for loop to store the 5 phase values in an array, instead of re-calculating the same 5 values over and over again.
 
-	*New for Submittal 2*
-	6) (Starting at Line 556) Changed the number of pizzas generated to a dynamic number based on the screen height. The number of pizzas generated was excessive because most of the pizzas were not shown.
+	6) (Starting at Line 557) Changed the number of pizzas generated to a dynamic number based on the screen height. The number of pizzas generated was excessive because most of the pizzas were not shown.
     
 
 
